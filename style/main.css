@@ -197,11 +197,13 @@ main {
         border: 2px solid #252422;
         margin: 5px;
         width: 320px;
+        height: 125px;
     }
 
     .img_product {
         margin-right: 5px;
         max-width: 150px;
+        max-height: 125px;
         border-right: 2px solid #252422;
     }
 
@@ -245,11 +247,13 @@ main {
         border: 3px solid #252422;
         margin: 15px;
         width: 510px;
+        height: 200px;
     }
 
     .img_product {
         margin-right: 15px;
         max-width: 240px;
+        max-height: 200px;
         border-right: 3px solid #252422;
     }
 
@@ -293,11 +297,13 @@ main {
         border: 4px solid #252422;
         margin: 20px;
         width: 900px;
+        height: 208px;
     }
 
     .img_product {
         margin-right: 20px;
         max-width: 250px;
+        max-height: 208px;
         border-right: 4px solid #252422;
     }
 
