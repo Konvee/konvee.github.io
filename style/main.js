@@ -17,60 +17,88 @@ const BRASIL = "bra";
 const CUBA = "cub";
 const ESPANA = "esp";
 
+// Listado de productos :::
+const PRODUCT = [
+    {
+        Name: "Aceite de girasol",
+        Cant: 1,
+        Unid: LT,
+        Code: "B002",
+        Price: 800.00,
+        Country: ESPANA,
+        DPrice: 0.00,
+        Down: false,
+        Stock: true
+    },
+    {
+        Name: "Azúcar blanca (Bolsa pequeña) <i>(Granel)</i>",
+        Cant: 1,
+        Unid: KG,
+        Code: "B001",
+        Price: 750.00,
+        Country: BRASIL,
+        DPrice: 0.00,
+        Down: false,
+        Stock: true
+    },
+    {
+        Name: "Azúcar blanca (Bolsa grande) <i>(Granel)</i>",
+        Cant: 5,
+        Unid: KG,
+        Code: "B001",
+        Price: 3750.00,
+        Country: BRASIL,
+        DPrice: 3500.00,
+        Down: true,
+        Stock: true
+    },
+    {
+        Name: "Refresco pomo sabor mate",
+        Cant: 1.5,
+        Unid: LT,
+        Code: "D001",
+        Price: 550.00,
+        Country: CUBA,
+        DPrice: 0.00,
+        Down: false,
+        Stock: true
+    }
+];
+
 // Lista de productos del cliente :::
 let BuyListClient = [];
+let TotalBuyCost = 0.00;
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Listado de productos :::
-    const PRODUCT = [
-        {
-            Name: "Aceite de girasol",
-            Cant: 1,
-            Unid: LT,
-            Code: "B002",
-            Price: 800.00,
-            Country: ESPANA,
-            DPrice: 0.00,
-            Down: false,
-            Stock: true
-        },
-        {
-            Name: "Azúcar blanca (Bolsa pequeña) <i>(Granel)</i>",
-            Cant: 1,
-            Unid: KG,
-            Code: "B001",
-            Price: 750.00,
-            Country: BRASIL,
-            DPrice: 0.00,
-            Down: false,
-            Stock: true
-        },
-        {
-            Name: "Azúcar blanca (Bolsa grande) <i>(Granel)</i>",
-            Cant: 5,
-            Unid: KG,
-            Code: "B001",
-            Price: 3750.00,
-            Country: BRASIL,
-            DPrice: 3500.00,
-            Down: true,
-            Stock: true
-        },
-        {
-            Name: "Refresco pomo sabor mate",
-            Cant: 1.5,
-            Unid: LT,
-            Code: "D001",
-            Price: 550.00,
-            Country: CUBA,
-            DPrice: 0.00,
-            Down: false,
-            Stock: true
-        }
-    ];
+    // Lista de productos.
     const ProductList = document.getElementById('product-list');
+    // Buycar.
+    const BuycarCount = document.getElementById('buycar_count_product');
+    const ListProdEnc = document.getElementById('lista-prod-enc');
+    // Botones de compra y cancelacion.
+    const ButtonCancelBuy = document.getElementById('button_cancel');
+    const ButtonSendBuy = document.getElementById('button_send');
+    // Suma de productos en el BuyCar.
+    const TotalComp = document.getElementById('suma_prod');
+    // Boton de cancelacion.
+    ButtonCancelBuy.addEventListener('click', () => {
+        if (BuyListClient.length != 0) { // En caso de que el carro no este vacio.
+            BuyListClient.length = 0;
+            BuycarCount.innerHTML = 0;
+            TotalBuyCost = 0;
+            TotalComp.innerHTML = `<b>TOTAL: 0.00 cup </b>`;
+            while (ListProdEnc.childElementCount != 0) {
+                ListProdEnc.removeChild(ListProdEnc.firstChild);
+            }
+        }
+    });
+    // Boton de compra.
+    ButtonSendBuy.addEventListener('click', () => {
+
+    });
+    // Apartado de productos.
     PRODUCT.forEach(prod => {
-        if (prod.Stock == true) {
+        if (prod.Stock == true) { // Si el producto esta en STOCK.
             if (prod.Down == false || (prod.Down == true && prod.DPrice > 0)) {
                 let pDiv = document.createElement('div');
                 pDiv.classList.add('product');
@@ -135,11 +163,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Boton de compra :::
                 let buttonBuy = document.createElement('button');
                 buttonBuy.innerHTML = "<b>+</b> Agregar producto al carrito";
+                // Funcion del boton de compra.
                 buttonBuy.addEventListener('click', () => {
-                    BuyListClient.push(
-                        (BuyListClient.length + 1).toString() + ". (" + prod.Code + ") :NAME: " + prod.Name + " :CANT: " + prod.Cant + prod.Unid + " :PRICE: " + prod.Price + "cup \n"
-                    );
-                    alert(BuyListClient);
+                    if (prod.Down == true) {
+                        BuyListClient.push(
+                            `[${BuyListClient.length + 1}].[CODE](${prod.Code}).[NAME](${prod.Name}).[CANT](${prod.Cant}${prod.Unid}).[PRICE](${prod.DPrice}cup).[COI](${prod.Country}).[REBAJA]\n`
+                        );
+                        TotalBuyCost += prod.DPrice;
+                    } else {
+                        BuyListClient.push(
+                            `[${BuyListClient.length + 1}].[CODE](${prod.Code}).[NAME](${prod.Name}).[CANT](${prod.Cant}${prod.Unid}).[PRICE](${prod.Price}cup).[COI](${prod.Country}).[Normal]\n`
+                        );
+                        TotalBuyCost += prod.Price;
+                    }
+                    BuycarCount.innerHTML = (BuyListClient.length.toString());
+                    let listElement = document.createElement('li');
+                    if (prod.Down == false) {
+                        listElement.innerHTML = `<i>${prod.Name.substring(0, (38 - prod.Price.toFixed(2).toString().length - 4))} ${prod.Price.toFixed(2)}cup</i>`;
+                    } else {
+                        listElement.innerHTML = `<i>${prod.Name.substring(0, (38 - prod.DPrice.toFixed(2).toString().length - 4))} ${prod.DPrice.toFixed(2)}cup</i>`;
+                    }
+                    let buttonDeleteProd = document.createElement('button');
+                    buttonDeleteProd.classList.add('cancel-bbt');
+                    buttonDeleteProd.innerHTML = "<b>x</b>";
+                    listElement.appendChild(buttonDeleteProd);
+                    ListProdEnc.appendChild(listElement);
+                    TotalComp.innerHTML = `<b>TOTAL: ${TotalBuyCost.toFixed(2)} cup </b>`;
+                    // funcion de eliminar un producto.
+                    buttonDeleteProd.addEventListener('click', () => { });
                 });
                 // Agreagamos los elementos :::
                 pInfo.appendChild(pName);

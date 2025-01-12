@@ -8,6 +8,7 @@
     <title>Bienvenido a Konvee</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="icon" href="logo.webp" type="image/x-icon">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,14 @@
             <img src="buycar.webp" alt="buycar_logo" class="logo-car">
             <div class="buycar_count">
                 <span id="buycar_count_product">0</span>
+            </div>
+            <div class="prod_buy_list" id="prod_buy_list">
+                <p class="ldp"><u><b>Lista de productos:</b></u></p>
+                <ul id="lista-prod-enc"></ul>
+                <p class="ldp"><b>------------------------------------------</b></p>
+                <p class="ldp" id="suma_prod"><b>TOTAL: 0.00 cup </b></p>
+                <p class="ldp"><button class="button_cancel_send" id="button_cancel"><b>CANCELAR</b></button><button
+                        class="button_cancel_send" id="button_send"><b>COMPRAR</b></button></p>
             </div>
         </div>
     </header>
@@ -42,7 +51,7 @@
             </ul>
             <ul class="right">
                 <li><a href="" class="link-clean">Política de privacidad</a></li>
-                <li><a href="" class="link-clean">Quejas y sugerencias</a></li>
+                <li><a href="" class="link-clean">Como usar nuestra página</a></li>
                 <li><a href="mailto: konveestore@gmail.com" class="link-clean">Email: konveestore@gmail.com</a></li>
             </ul>
         </div>

@@ -111,6 +111,41 @@ header {
     border: 1px solid #403D39;
 }
 
+.prod_buy_list {
+    position: absolute;
+    background-color: #FFFCF2;
+    color: #403D39;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ldp {
+    display: flex;
+    justify-content: center;
+}
+
+.button_cancel_send {
+    background-color: #FF5600;
+    color: #403D39;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-bbt {
+    background-color: #FF5600;
+    color: #403D39;
+    border-radius: 40%;
+    justify-content: center;
+    align-items: center;
+}
+
+.prod_buy_list ul {
+    justify-content: left;
+}
+
 @media only screen and (max-width: 600px) {
     .logo-konvee {
         max-width: 60px;
@@ -178,6 +213,34 @@ header {
         margin-left: 45px;
         width: 25px;
         height: 25px;
+    }
+
+    .prod_buy_list {
+        margin-top: -5px;
+        margin-left: -390px;
+        width: 430px;
+        border: 2px solid #403D39;
+        border-top: 5px solid #403D39;
+    }
+
+    .prod_buy_list li {
+        width: 400px;
+        height: 20px;
+    }
+
+    .button_cancel_send {
+        border: 2px solid #252422;
+        width: 120px;
+        height: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .cancel-bbt {
+        width: 22px;
+        height: 22px;
+        border: 2px solid #252422;
+        margin-left: 10px;
     }
 }
 
